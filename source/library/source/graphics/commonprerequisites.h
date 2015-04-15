@@ -3,10 +3,10 @@
 
 /*!
   * \file commonprerequisites.h
-  * \brief Глобальные объявления для библиотеки satellite-graphics.
+  * \brief Глобальные объявления для библиотеки graphics.
   */
 
-//! Пространство имен с классами библиотеки satellite-graphics.
+//! Пространство имен с классами библиотеки graphics.
 namespace Graphics {
 
 class AbstractScale;
@@ -49,14 +49,14 @@ class StandardPlotView;
 #endif
 
 /*!
-  * \mainpage Библиотека Satellite-Graphics
+  * \mainpage Библиотека Graphics
   *
   * \section Назначение
-  * Библиотека satellite-graphics предоставлет набор инструментов для построения и отображения
+  * Библиотека graphics предоставлет набор инструментов для построения и отображения
   * двумерных графиков в приложениях.
   *
   * \section Компоненты
-  * Библиотека satellite-graphics предоставляет следующие компоненты:
+  * Библиотека graphics предоставляет следующие компоненты:
   * <ul>
   * <li>Graphics::AbstractPlotItem - класс для создания элементов графика</li>
   * <li>Graphics::AbstractScale - класс для создания шкал</li>
