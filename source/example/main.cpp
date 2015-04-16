@@ -41,6 +41,9 @@ int main(int argc, char *argv[])
     scene->setXScale(x_scale);
     scene->setYScale(y_scale);
     scene->setLayout(layout);
+    scene->setZoomExtent(3600 * 2);
+    scene->setMinimumZoomStep(-100);
+    scene->setMaximumZoomStep(100);
 
     DateTimeScalePlotItem *scale_item = new DateTimeScalePlotItem(x_scale);
     scale_item->setBeginCoordinates(x_scale->minimum(), 0);
