@@ -13,5 +13,8 @@ INCLUDEPATH += \
 LIBS += \
     -L$$GRAPHICS_LIB_DIR -l$$GRAPHICS_LIB_NAME
 
+HEADERS = \
+    simpleitem.h
+
 SOURCES = \
     main.cpp

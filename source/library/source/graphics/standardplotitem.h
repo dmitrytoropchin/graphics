@@ -23,11 +23,12 @@ class GRAPHICS_EXPORT StandardPlotItem : public AbstractPlotItem {
 
     //! Указатель на реализацию.
     StandardPlotItemPrivate * const d_ptr;
-public:
+protected:
     //! Конструктор.
     StandardPlotItem();
+public:
     //! Деструктор.
-    ~StandardPlotItem();
+    virtual ~StandardPlotItem();
 
     QPointF beginCoordinates() const;
     void setBeginCoordinates(double x, double y);
@@ -69,7 +70,6 @@ public:
     void setPlotScene(AbstractPlotScene *plot_scene);
 
     QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
 
 } // namespace Graphics

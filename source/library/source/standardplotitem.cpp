@@ -220,19 +220,4 @@ QRectF StandardPlotItem::boundingRect() const
     return QRectF(QPointF(- d->size.width() * 0.5, - d->size.height() * 0.5), d->size);
 }
 
-void StandardPlotItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    Q_UNUSED(widget);
-    Q_UNUSED(option);
-
-    painter->save();
-
-    painter->setPen(QPen(QBrush(Qt::black), 1.0));
-    painter->setBrush(QBrush(Qt::yellow));
-
-    painter->drawRect(boundingRect().adjusted(1, 1, -1, -1));
-
-    painter->restore();
-}
-
 } // namespace Graphics
