@@ -1,7 +1,7 @@
 #include <QDateTime>
 
 #include "graphics/datetimescale.h"
-#include "graphics/valueadapter.h"
+#include "graphics/converter.h"
 
 
 namespace Graphics {
@@ -46,7 +46,7 @@ void DateTimeScale::setFormat(const QString &format)
 QString DateTimeScale::label(double position) const
 {
     Q_D(const DateTimeScale);
-    return DateTimeValueAdapter::fromAdapted(value(position)).toString(d->format);
+    return Converter::fromScale(value(position)).toString(d->format);
 }
 
 } // namespace Graphics

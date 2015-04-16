@@ -8,7 +8,7 @@
 
 #include "graphics/datetimescaleplotitem.h"
 #include "graphics/datetimescale.h"
-#include "graphics/valueadapter.h"
+#include "graphics/converter.h"
 #include "graphics/datetimescaleengine.h"
 
 

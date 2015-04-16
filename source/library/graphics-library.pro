@@ -37,7 +37,7 @@ GRAPHICS_PUBLIC_HEADERS = \
     source/graphics/standardplotlayout.h \
     source/graphics/standardplotscene.h \
     source/graphics/standardplotview.h \
-    source/graphics/valueadapter.h
+    source/graphics/converter.h
 
 GRAPHICS_PRIVATE_HEADERS =
 
@@ -56,7 +56,7 @@ GRAPHICS_SOURCES = \
     source/standardplotlayout.cpp \
     source/standardplotscene.cpp \
     source/standardplotview.cpp \
-    source/valueadapter.cpp
+    source/converter.cpp
 
 HEADERS += \
     $$GRAPHICS_PUBLIC_HEADERS \

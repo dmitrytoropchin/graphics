@@ -5,7 +5,7 @@
 
 #include "graphics/datetimescaleengine.h"
 #include "graphics/abstractscale.h"
-#include "graphics/valueadapter.h"
+#include "graphics/converter.h"
 
 
 namespace Graphics {
@@ -109,7 +109,7 @@ double DateTimeScaleEnginePrivate::distance(const QDateTime &from, const QDateTi
     if (scale == 0)
         return 0.0;
 
-    return scale->distance(DateTimeValueAdapter::toAdapted(from), DateTimeValueAdapter::toAdapted(to));
+    return scale->distance(Converter::toScale(from), Converter::toScale(to));
 }
 
 DateTimeScaleEnginePrivate::SplitInterval DateTimeScaleEnginePrivate::interval(const double minimum_tick_distance) const
@@ -117,7 +117,7 @@ DateTimeScaleEnginePrivate::SplitInterval DateTimeScaleEnginePrivate::interval(c
     if (scale == 0)
         return IntervalNone;
 
-    QDateTime scale_minimum = DateTimeValueAdapter::fromAdapted(scale->minimum());
+    QDateTime scale_minimum = Converter::fromScale(scale->minimum());
 
     if (distance(scale_minimum, scale_minimum.addSecs(1)) > minimum_tick_distance)
         return IntervalSecond_1;
@@ -250,9 +250,9 @@ double DateTimeScaleEnginePrivate::tickDistance(DateTimeScaleEnginePrivate::Spli
     if (scale == 0)
         return 0.0;
 
-    QDateTime scale_minimum = DateTimeValueAdapter::fromAdapted(scale->minimum());
+    QDateTime scale_minimum = Converter::fromScale(scale->minimum());
 
-    return scale->position(DateTimeValueAdapter::toAdapted(nextDateTime(scale_minimum, interval)));
+    return scale->position(Converter::toScale(nextDateTime(scale_minimum, interval)));
 }
 
 int DateTimeScaleEnginePrivate::majorTickStep(DateTimeScaleEnginePrivate::SplitInterval interval) const
@@ -595,8 +595,8 @@ void DateTimeScaleEngine::update(const QFontMetrics &font_metrics, const QRectF 
 
     const int major_tick_step = d->majorTickStep(interval);
 
-    const QDateTime tick_start_value = DateTimeValueAdapter::fromAdapted(d->scale->minimum());
-    const QDateTime tick_end_value = DateTimeValueAdapter::fromAdapted(d->scale->maximum());
+    const QDateTime tick_start_value = Converter::fromScale(d->scale->minimum());
+    const QDateTime tick_end_value = Converter::fromScale(d->scale->maximum());
 
     const QDateTime major_tick_start_val = d->alignedToInterval(tick_start_value, interval, major_tick_step);
 
@@ -607,13 +607,13 @@ void DateTimeScaleEngine::update(const QFontMetrics &font_metrics, const QRectF 
                                                                                : scale_rect.y();
 
     for (QDateTime tick_value = tick_start_value; tick_value < major_tick_start_val; /**/) {
-        d->tick_positions.append(d->scale->position(DateTimeValueAdapter::toAdapted(tick_value)) + tick_pos_offset);
+        d->tick_positions.append(d->scale->position(Converter::toScale(tick_value)) + tick_pos_offset);
         tick_value = d->nextDateTime(tick_value, interval);
     }
 
     int tick_step = 0;
     for (QDateTime tick_value = major_tick_start_val; tick_value <= tick_end_value; ++ tick_step) {
-        const double tick_pos = d->scale->position(DateTimeValueAdapter::toAdapted(tick_value)) + tick_pos_offset;
+        const double tick_pos = d->scale->position(Converter::toScale(tick_value)) + tick_pos_offset;
         if ((tick_step % major_tick_step) == 0)
             d->major_tick_positions.append(tick_pos);
         else
@@ -636,12 +636,12 @@ void DateTimeScaleEngine::update(const QFontMetrics &font_metrics, const QRectF 
         if (d->scale->orientation() == Qt::Horizontal) {
             if (revert) {
                 tick_label_rect.moveCenter(
-                            QPointF(d->scale->position(DateTimeValueAdapter::toAdapted(tick_value)) + scale_rect.x(),
+                            QPointF(d->scale->position(Converter::toScale(tick_value)) + scale_rect.x(),
                                     scale_rect.bottom() - 10.0 - tick_label_rect.height() * 0.5));
             }
             else {
                 tick_label_rect.moveCenter(
-                            QPointF(d->scale->position(DateTimeValueAdapter::toAdapted(tick_value)) + scale_rect.x(),
+                            QPointF(d->scale->position(Converter::toScale(tick_value)) + scale_rect.x(),
                                     scale_rect.top() + 10.0 + tick_label_rect.height() * 0.5));
             }
         }
@@ -649,12 +649,12 @@ void DateTimeScaleEngine::update(const QFontMetrics &font_metrics, const QRectF 
             if (revert) {
                 tick_label_rect.moveCenter(
                             QPointF(scale_rect.right() - 13.0 - tick_label_rect.width() * 0.5,
-                                    d->scale->position(DateTimeValueAdapter::toAdapted(tick_value)) + scale_rect.y()));
+                                    d->scale->position(Converter::toScale(tick_value)) + scale_rect.y()));
             }
             else {
                 tick_label_rect.moveCenter(
                             QPointF(scale_rect.left() + 13.0 + tick_label_rect.width() * 0.5,
-                                    d->scale->position(DateTimeValueAdapter::toAdapted(tick_value)) + scale_rect.y()));
+                                    d->scale->position(Converter::toScale(tick_value)) + scale_rect.y()));
             }
         }
 

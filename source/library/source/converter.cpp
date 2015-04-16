@@ -1,16 +1,16 @@
 #include <QDateTime>
 
-#include "graphics/valueadapter.h"
+#include "graphics/converter.h"
 
 
 namespace Graphics {
 
-double DateTimeValueAdapter::toAdapted(const QDateTime &val)
+double Converter::toScale(const QDateTime &val)
 {
     return double(val.toTime_t());
 }
 
-QDateTime DateTimeValueAdapter::fromAdapted(double val)
+QDateTime Converter::fromScale(double val)
 {
     return QDateTime::fromTime_t(val);
 }

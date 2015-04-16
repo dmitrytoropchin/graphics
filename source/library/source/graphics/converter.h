@@ -1,5 +1,5 @@
-#ifndef GRAPHICS_ABSTRACTVALUEADAPTER_H
-#define GRAPHICS_ABSTRACTVALUEADAPTER_H
+#ifndef GRAPHICS_CONVERTER_H
+#define GRAPHICS_CONVERTER_H
 
 /*!
   * \file valueadapter.h
@@ -16,14 +16,14 @@ class QDateTime;
 namespace Graphics {
 
 //! Адаптер для конвертации дат и времени в числовые значения для шкал.
-class GRAPHICS_EXPORT DateTimeValueAdapter {
+class GRAPHICS_EXPORT Converter {
 public:
     //! Конвертация даты \c val в число.
-    static double toAdapted(const QDateTime &val);
+    static double toScale(const QDateTime &val);
     //! Конвертация числа \c val в дату.
-    static QDateTime fromAdapted(double val);
+    static QDateTime fromScale(double val);
 };
 
 } // namespace Graphics
 
-#endif // GRAPHICS_ABSTRACTVALUEADAPTER_H
+#endif // GRAPHICS_CONVERTER_H

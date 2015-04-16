@@ -1,6 +1,6 @@
 #include <QDateTime>
 
-#include "graphics/valueadapter.h"
+#include "graphics/converter.h"
 #include "graphics/infiniteplotscene.h"
 #include "graphics/abstractscale.h"
 

@@ -8,7 +8,7 @@
 #include <graphics/standardplotlayout.h>
 #include <graphics/standardplotscene.h>
 #include <graphics/infiniteplotscene.h>
-#include <graphics/valueadapter.h>
+#include <graphics/converter.h>
 #include <graphics/datetimescaleplotitem.h>
 #include <graphics/interactiveplotitem.h>
 #include <graphics/standardplotview.h>
@@ -24,13 +24,11 @@ int main(int argc, char *argv[])
     view->setAttribute(Qt::WA_DeleteOnClose);
     view->setWindowTitle("Graphics Plot Test");
 
-    DateTimeValueAdapter adapter;
-
     DateTimeScale *x_scale = new DateTimeScale();
     x_scale->setOrientation(Qt::Horizontal);
     x_scale->setLength(3000);
-    x_scale->setRange(adapter.toAdapted(QDateTime(QDate(2014, 9, 30), QTime(0, 0, 0))),
-                      adapter.toAdapted(QDateTime(QDate(2014, 10, 1), QTime(0, 0, 0))));
+    x_scale->setRange(Converter::toScale(QDateTime(QDate(2014, 9, 30), QTime(0, 0, 0))),
+                      Converter::toScale(QDateTime(QDate(2014, 10, 1), QTime(0, 0, 0))));
 
     SectionScale *y_scale = new SectionScale();
     y_scale->setOrientation(Qt::Vertical);
@@ -53,24 +51,24 @@ int main(int argc, char *argv[])
     scene->addPlotItem(scale_item);
 
     StandardPlotItem *plot_item_1 = new StandardPlotItem();
-    plot_item_1->setBeginCoordinates(adapter.toAdapted(QDateTime(QDate(2014, 10, 1), QTime(0, 20, 0))), 1);
-    plot_item_1->setEndCoordinates(adapter.toAdapted(QDateTime(QDate(2014, 10, 1), QTime(3, 13, 0))), 1);
+    plot_item_1->setBeginCoordinates(Converter::toScale(QDateTime(QDate(2014, 10, 1), QTime(0, 20, 0))), 1);
+    plot_item_1->setEndCoordinates(Converter::toScale(QDateTime(QDate(2014, 10, 1), QTime(3, 13, 0))), 1);
     plot_item_1->setWidthCalculated(true);
     plot_item_1->setHeightCalculated(true);
 
     scene->addPlotItem(plot_item_1);
 
     StandardPlotItem *plot_item_2 = new StandardPlotItem();
-    plot_item_2->setBeginCoordinates(adapter.toAdapted(QDateTime(QDate(2014, 10, 1), QTime(3, 43, 20))), 1);
-    plot_item_2->setEndCoordinates(adapter.toAdapted(QDateTime(QDate(2014, 10, 1), QTime(13, 13, 13))), 1);
+    plot_item_2->setBeginCoordinates(Converter::toScale(QDateTime(QDate(2014, 10, 1), QTime(3, 43, 20))), 1);
+    plot_item_2->setEndCoordinates(Converter::toScale(QDateTime(QDate(2014, 10, 1), QTime(13, 13, 13))), 1);
     plot_item_2->setWidthCalculated(true);
     plot_item_2->setHeightCalculated(true);
 
     scene->addPlotItem(plot_item_2);
 
     StandardPlotItem *plot_item_3 = new StandardPlotItem();
-    plot_item_3->setBeginCoordinates(adapter.toAdapted(QDateTime(QDate(2014, 10, 1), QTime(1, 10, 0))), 2);
-    plot_item_3->setEndCoordinates(adapter.toAdapted(QDateTime(QDate(2014, 10, 1), QTime(9, 0, 0))), 2);
+    plot_item_3->setBeginCoordinates(Converter::toScale(QDateTime(QDate(2014, 10, 1), QTime(1, 10, 0))), 2);
+    plot_item_3->setEndCoordinates(Converter::toScale(QDateTime(QDate(2014, 10, 1), QTime(9, 0, 0))), 2);
     plot_item_3->setWidthCalculated(true);
     plot_item_3->setHeightCalculated(false);
     plot_item_3->setHeight(20);
@@ -78,16 +76,16 @@ int main(int argc, char *argv[])
     scene->addPlotItem(plot_item_3);
 
     StandardPlotItem *plot_item_4 = new StandardPlotItem();
-    plot_item_4->setBeginCoordinates(adapter.toAdapted(QDateTime(QDate(2014, 10, 1), QTime(15, 0, 0))), 1);
-    plot_item_4->setEndCoordinates(adapter.toAdapted(QDateTime(QDate(2014, 10, 1), QTime(19, 0, 0))), 4);
+    plot_item_4->setBeginCoordinates(Converter::toScale(QDateTime(QDate(2014, 10, 1), QTime(15, 0, 0))), 1);
+    plot_item_4->setEndCoordinates(Converter::toScale(QDateTime(QDate(2014, 10, 1), QTime(19, 0, 0))), 4);
     plot_item_4->setWidthCalculated(true);
     plot_item_4->setHeightCalculated(true);
 
     scene->addPlotItem(plot_item_4);
 
     StandardPlotItem *plot_item_5 = new StandardPlotItem();
-    plot_item_5->setBeginCoordinates(adapter.toAdapted(QDateTime(QDate(2014, 10, 1), QTime(1, 10, 0))), 3);
-    plot_item_5->setEndCoordinates(adapter.toAdapted(QDateTime(QDate(2014, 10, 1), QTime(9, 0, 0))), 3);
+    plot_item_5->setBeginCoordinates(Converter::toScale(QDateTime(QDate(2014, 10, 1), QTime(1, 10, 0))), 3);
+    plot_item_5->setEndCoordinates(Converter::toScale(QDateTime(QDate(2014, 10, 1), QTime(9, 0, 0))), 3);
     plot_item_5->setWidthCalculated(true);
     plot_item_5->setHeightCalculated(false);
     plot_item_5->setHeight(20);
@@ -95,8 +93,8 @@ int main(int argc, char *argv[])
     scene->addPlotItem(plot_item_5);
 
     StandardPlotItem *plot_item_6 = new StandardPlotItem();
-    plot_item_6->setBeginCoordinates(adapter.toAdapted(QDateTime(QDate(2014, 10, 1), QTime(1, 10, 0))), 4);
-    plot_item_6->setEndCoordinates(adapter.toAdapted(QDateTime(QDate(2014, 10, 1), QTime(9, 0, 0))), 4);
+    plot_item_6->setBeginCoordinates(Converter::toScale(QDateTime(QDate(2014, 10, 1), QTime(1, 10, 0))), 4);
+    plot_item_6->setEndCoordinates(Converter::toScale(QDateTime(QDate(2014, 10, 1), QTime(9, 0, 0))), 4);
     plot_item_6->setWidthCalculated(true);
     plot_item_6->setHeightCalculated(false);
     plot_item_6->setHeight(20);
